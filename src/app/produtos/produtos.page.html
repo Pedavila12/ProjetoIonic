@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="selecionar($event)">
+    <ion-segment-button value="Choker">
+      <ion-label>Choker</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Colar">
+      <ion-label>Colar</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+
+  <ion-list *ngIf="opcaoSelecionada == 'Choker'">
+    <div *ngFor=" let produto of produtos; index as i">
+    <ion-item >
+      <ion-card>
+        <a (click)="selecionaProduto(i)">
+        <ion-img [src]="produto.imagem" ></ion-img></a>
+        <ion-card-content>
+          <ion-card-title>{{produto.titulo}}</ion-card-title>
+          <p>{{produto.preco}}</p>
+          <ion-item>
+            <ion-label>Quantidade</ion-label>
+            <ion-select placeholder="Selecione"[(ngModel)]="produto.quantidade" (ngModelChange)="selectChange()">
+              <ion-select-option *ngFor=" let opcao of opcoes" [value]="opcao">{{opcao}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </div>
+
+    
+
+  </ion-list>
+
+  <ion-list *ngIf="opcaoSelecionada == 'Colar'">
+    <ion-item>Azul</ion-item>
+    <ion-item>Verde</ion-item>
+    <ion-item>Amarelo</ion-item>
+    <ion-item>Roxo</ion-item>
+  </ion-list>
+
+</ion-content>
